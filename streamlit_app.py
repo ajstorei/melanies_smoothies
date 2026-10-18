@@ -11,6 +11,11 @@ st.write(
 name_on_order = st.text_input("Name on Smoothie:")
 st.write("The name on your Smoothie will be:", name_on_order)
 
+s = st.secrets["connections"]["snowflake"]
+tk = s.get("token", "")
+st.write("token length:", len(tk), "| starts:", tk[:6], "| ends:", tk[-6:],
+         "| has whitespace:", any(c.isspace() for c in tk))
+
 cnx = st.connection("snowflake")
 session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select (col('FRUIT_NAME'))
