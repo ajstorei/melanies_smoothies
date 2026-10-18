@@ -15,6 +15,7 @@ s = st.secrets["connections"]["snowflake"]
 tk = s.get("token", "")
 st.write("token length:", len(tk), "| starts:", tk[:6], "| ends:", tk[-6:],
          "| has whitespace:", any(c.isspace() for c in tk))
+st.write("parts:", tk.count(".") + 1)
 
 cnx = st.connection("snowflake")
 session = cnx.session()
